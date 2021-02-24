@@ -12,6 +12,7 @@ public class REfectoIniciarFrame {
                     @Override
                     public void windowOpened(WindowEvent e) {
                         super.windowOpened(e);
+                        jFrame.setBackground(RColores.BLANCO_OPACO);
                         for (double i = 0.0; i <= 1.0; i = i + 0.1) {
                             String val = i + "";
                             float f = Float.parseFloat(val);
