@@ -1,7 +1,7 @@
 package vista.login.paneles;
 
 import recursos.RAgrImg;
-import recursos.R_Colores;
+import recursos.RColores;
 import vista.login.VLogin;
 
 import javax.swing.*;
@@ -36,7 +36,7 @@ public class PanelTopBotones extends JPanel {
         this.panelesMargenes();
         this.botonesIconos();
 
-        this.setBackground(R_Colores.BLANCO_OPACO);
+        this.setBackground(RColores.BLANCO_OPACO);
         this.setSize(new Dimension(1280, 60));
     }
 
@@ -50,12 +50,12 @@ public class PanelTopBotones extends JPanel {
         }
 
         this.paneles[0].setPreferredSize(new Dimension(100, 60));
-        this.paneles[0].setBackground(R_Colores.NEGRO_OPCACO);
+        this.paneles[0].setBackground(RColores.NEGRO_OPCACO);
         this.add(this.paneles[0], BorderLayout.WEST);
 
         this.flowLayout.setVgap(18);
         this.paneles[1].setPreferredSize(new Dimension(1180, 60));
-        this.paneles[1].setBackground(R_Colores.NEGRO_OPCACO);
+        this.paneles[1].setBackground(RColores.NEGRO_OPCACO);
         this.add(this.paneles[1], BorderLayout.CENTER);
     }
 
@@ -83,5 +83,38 @@ public class PanelTopBotones extends JPanel {
                     }
                 }
         );
+
+        this.lblIconos[1].addMouseListener(
+                new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        if (e.getSource() == PanelTopBotones.this.lblIconos[1]) {
+                            if (PanelTopBotones.this.vLogin.getExtendedState() == Frame.MAXIMIZED_BOTH) {
+                                RAgrImg.agrImg(PanelTopBotones.URL_ICONOS[1], PanelTopBotones.this.lblIconos[1]);
+                                PanelTopBotones.this.vLogin.setSize(new Dimension(1280, 720));
+                                PanelTopBotones.this.vLogin.setLocationRelativeTo(null);
+                            } else {
+                                RAgrImg.agrImg("maximizar.png", PanelTopBotones.this.lblIconos[1]);
+                                PanelTopBotones.this.vLogin.setExtendedState(Frame.MAXIMIZED_BOTH);
+                            }
+                        }
+                    }
+                }
+        );
+
+        this.lblIconos[2].addMouseListener(
+                new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        if (e.getSource() == PanelTopBotones.this.lblIconos[2]) {
+                            PanelTopBotones.this.vLogin.setExtendedState(Frame.ICONIFIED);
+                        }
+                    }
+                }
+        );
+
+
     }
 }

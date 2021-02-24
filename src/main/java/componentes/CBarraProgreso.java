@@ -1,6 +1,6 @@
 package componentes;
 
-import recursos.R_Colores;
+import recursos.RColores;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,12 +9,12 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 
 public class CBarraProgreso extends JProgressBar {
-    private Color colorBackBarraProgreso = R_Colores.LADRILLO;
-    private Color colorBackground = R_Colores.BLANCO_MENOS_OPACO;
-    private Color colorPorcentaje = R_Colores.NEGRO_OPCACO;
-    private Color colorLetras = R_Colores.NEGRO_OPCACO;
-    private int grosorBorde = 1;
-    private Color colorBorde = R_Colores.LADRILLO;
+    private Color colorBackBarraProgreso = RColores.LADRILLO;
+    private Color colorBackground = RColores.BLANCO_MENOS_OPACO;
+    private Color colorPorcentaje = RColores.NEGRO_OPCACO;
+    private Color colorLetras = RColores.NEGRO_OPCACO;
+    private int grosorBorde = 2;
+    private Color colorBorde = RColores.LADRILLO;
 
     private Border borde = new LineBorder(this.colorBorde, this.grosorBorde, true);
     private boolean horizontalOrientacion = true;

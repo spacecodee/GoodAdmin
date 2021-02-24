@@ -10,7 +10,7 @@ import vista.splash.paneles.PanelContenedor;
 import javax.swing.*;
 import java.awt.*;
 
-import static recursos.R_Colores.*;
+import static recursos.RColores.*;
 
 public class VSplash extends JDialog {
     //width => ancho; heigth => alto

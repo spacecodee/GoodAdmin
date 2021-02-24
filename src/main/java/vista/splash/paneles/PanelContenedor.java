@@ -1,5 +1,7 @@
 package vista.splash.paneles;
 
+import recursos.RColores;
+
 import javax.swing.*;
 import java.awt.*;
 
