@@ -15,6 +15,7 @@ public class PanelLateralLogin extends JPanel {
     private JButton btnAgregar;
     private JLabel lblSms;
     private FlowLayout flowLayout;
+    private JPanel pnlBotonesYSms;
 
     public PanelLateralLogin() {
         super();
@@ -26,6 +27,7 @@ public class PanelLateralLogin extends JPanel {
 
         this.panelesMargenes();
         this.agregarImg();
+        this.panelContenedor();
         this.agregarBoton();
         this.agregarLblSms();
 
@@ -63,6 +65,15 @@ public class PanelLateralLogin extends JPanel {
         this.panels[1].add(this.lblImgCard);
     }
 
+    private void panelContenedor() {
+        this.pnlBotonesYSms = new JPanel();
+        this.pnlBotonesYSms.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        this.pnlBotonesYSms.setSize(380, 160);
+        this.pnlBotonesYSms.setPreferredSize(new Dimension(380, 160));
+        this.pnlBotonesYSms.setBackground(RColores.BLANCO_OPACO);
+        this.panels[1].add(this.pnlBotonesYSms);
+    }
+
     private void agregarBoton() {
         this.btnAgregar = new JButton();
         this.btnAgregar.setSize(300, 50);
@@ -72,7 +83,7 @@ public class PanelLateralLogin extends JPanel {
         this.btnAgregar.setFocusPainted(false);
         this.btnAgregar.setContentAreaFilled(false);
         RAgrImg.agrImg("login/boton-agegar-usuario.png", this.btnAgregar);
-        this.panels[1].add(this.btnAgregar);
+        this.pnlBotonesYSms.add(this.btnAgregar);
 
         this.btnAgregar.addMouseListener(MaterialUIMovement.getMovement( //elimina el color al presionar el boton
                 this.btnAgregar, RColores.TRANSPARENCIA)
@@ -81,9 +92,9 @@ public class PanelLateralLogin extends JPanel {
 
     private void agregarLblSms() {
         this.lblSms = new JLabel("TE QUEDAN: 1, PERFILES DE USUARIOS");
-        this.lblSms.setSize(400, 16);
+        this.lblSms.setSize(300, 16);
         this.lblSms.setFont(RFuentes.getFuentePlana(14));
-        this.panels[1].add(this.lblSms);
+        this.pnlBotonesYSms.add(this.lblSms);
     }
 
     public JLabel getLblSms() {

@@ -44,7 +44,7 @@ public class VLogin extends JFrame {
                         super.windowStateChanged(e);
                         if (e.getSource() == VLogin.this) {
                             if (VLogin.this.getExtendedState() == Frame.MAXIMIZED_BOTH) {
-                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(25);
+                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(50);
                             } else if (VLogin.this.getHeight() == 720) {
                                 VLogin.this.panelLateralLogin.getFlowLayout().setVgap(15);
                             }
