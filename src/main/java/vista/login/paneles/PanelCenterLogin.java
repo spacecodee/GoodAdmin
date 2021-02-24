@@ -1,6 +1,8 @@
 package vista.login.paneles;
 
+import recursos.RAgrImg;
 import recursos.RColores;
+import recursos.RFuentes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,15 @@ public class PanelCenterLogin extends JPanel {
     private JPanel pnlCenter;
     private final PanelCentro panelCentro = new PanelCentro();
     private GridLayout gridLayout;
+    private JLabel[] lblAvatares;
+    private final String[] urlAvatars = {
+            "login/avatares/usuario1.png", "login/avatares/usuario2.png", "login/avatares/usuario3.png",
+            "login/avatares/usuario4.png", "login/avatares/usuario5.png"
+    };
+    private final JLabel[] lblNombreUsuarios = {
+            new JLabel("Usuario 1"), new JLabel("Usuario 2"), new JLabel("Usuario 3"),
+            new JLabel("Usuario 4"), new JLabel("Usuario 5")
+    };
 
     public PanelCenterLogin() {
         super();
@@ -26,6 +37,7 @@ public class PanelCenterLogin extends JPanel {
         this.margenes2();
         this.panelUsuarios();
         this.panelPerfilesUsuarios();
+        this.agregarLlblImg();
 
         this.setSize(883, 660);
         this.setPreferredSize(new Dimension(883, 660));
@@ -90,7 +102,25 @@ public class PanelCenterLogin extends JPanel {
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.pnlUsuarios[i] = new PanelUsuarios();
+            this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.pnlCenter.add(this.pnlUsuarios[i]);
+        }
+    }
+
+    private void agregarLlblImg() {
+        this.lblAvatares = new JLabel[5];
+        for (var i = 0; i < this.pnlUsuarios.length; i++) {
+            this.lblAvatares[i] = new JLabel();
+            this.lblAvatares[i].setSize(new Dimension(90, 150));
+            this.lblAvatares[i].setPreferredSize(new Dimension(90, 150));
+            RAgrImg.agrImg(this.urlAvatars[i], this.lblAvatares[i]);
+            this.pnlUsuarios[i].add(this.lblAvatares[i]);
+
+            this.lblNombreUsuarios[i].setFont(RFuentes.getFuenteNegrita(16));
+            this.lblNombreUsuarios[i].setHorizontalAlignment(SwingConstants.CENTER);
+            this.lblNombreUsuarios[i].setSize(205, 15);
+            this.lblNombreUsuarios[i].setPreferredSize(new Dimension(205, 15));
+            this.pnlUsuarios[i].add(this.lblNombreUsuarios[i]);
         }
     }
 }

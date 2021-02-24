@@ -8,6 +8,7 @@ public class PanelUsuarios extends JPanel {
 
     public PanelUsuarios() {
         super();
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
         this.setSize(205, 205);
     }
 
