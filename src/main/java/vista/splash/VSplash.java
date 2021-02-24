@@ -1,6 +1,7 @@
 package vista.splash;
 
 import componentes.CBarraProgreso;
+import controlador.splash.CSplash;
 import mdlaf.MaterialLookAndFeel;
 import recursos.RAgrImg;
 import recursos.RFuentes;
@@ -14,9 +15,12 @@ import static recursos.R_Colores.*;
 public class VSplash extends JDialog {
     //width => ancho; heigth => alto
 
+    private final CSplash cSplash = new CSplash();
+
     public VSplash() {
         super();
         this.initComponents();
+        this.cSplash.starThread(this.cBarraProgreso, this, this.lblSms, this.lblPorcentaje);
     }
 
     private void initComponents() {
@@ -96,24 +100,26 @@ public class VSplash extends JDialog {
     }
 
     private void panelDeCarga() {
-        this.lblCopy = new JLabel("Derechos Reservados: Space Code");
+        this.lblCopy = new JLabel("Derechos Reservados: Space Code".toUpperCase());
         this.cBarraProgreso = new CBarraProgreso();
-        this.lblSms = new JLabel("Cargando Módulos");
-        this.lblPorcentaje = new JLabel("50%");
+        this.lblSms = new JLabel("Cargando Módulos".toUpperCase());
+        this.lblPorcentaje = new JLabel("0%");
 
         this.lblCopy.setFont(RFuentes.getFuentePlana(20));
         this.lblCopy.setPreferredSize(new Dimension(600, 25));
         this.lblCopy.setForeground(NEGRO_OPCACO);
 
         this.lblSms.setFont(RFuentes.getFuentePlana(20));
-        this.lblSms.setPreferredSize(new Dimension(288, 25));
+        this.lblSms.setPreferredSize(new Dimension(550, 25));
         this.lblSms.setForeground(NEGRO_OPCACO);
 
         this.lblPorcentaje.setFont(RFuentes.getFuenteNegrita(20));
-        this.lblPorcentaje.setPreferredSize(new Dimension(312, 25));
-        this.lblPorcentaje.setForeground(NEGRO_OPCACO);
+        this.lblPorcentaje.setPreferredSize(new Dimension(50, 25));
+        this.lblPorcentaje.setHorizontalTextPosition(SwingConstants.RIGHT);
+        this.lblPorcentaje.setForeground(LADRILLO);
 
         this.cBarraProgreso.setPreferredSize(new Dimension(600, 75));
+        this.cBarraProgreso.setValue(0);
 
         this.pnlElementos[1].add(this.lblCopy);
         this.pnlElementos[1].add(this.cBarraProgreso);
