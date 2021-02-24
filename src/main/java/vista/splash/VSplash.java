@@ -4,6 +4,7 @@ import componentes.CBarraProgreso;
 import controlador.splash.CSplash;
 import mdlaf.MaterialLookAndFeel;
 import recursos.RAgrImg;
+import recursos.REfectoIniciarFrame;
 import recursos.RFuentes;
 import vista.splash.paneles.PanelContenedor;
 
@@ -34,10 +35,17 @@ public class VSplash extends JDialog {
         this.imgLogo();
         this.panelDeCarga();
 
+        this.esteFrame();
+    }
+
+    private void esteFrame() {
         this.setSize(new Dimension(800, 500));
         this.setUndecorated(true);
-        this.setBackground(TRANSPARENCIA);
         this.setLocationRelativeTo(null);
+        this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+
+        REfectoIniciarFrame.iniciarTransparencia(this, 0.9F);
+
         this.setVisible(true);
     }
 
