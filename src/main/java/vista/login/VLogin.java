@@ -1,7 +1,9 @@
 package vista.login;
 
 import mdlaf.MaterialLookAndFeel;
+import recursos.RAgrImg;
 import recursos.REfectoIniciarFrame;
+import vista.login.paneles.PanelCenterLogin;
 import vista.login.paneles.PanelLateralLogin;
 import vista.login.paneles.PanelTopBotones;
 
@@ -13,10 +15,11 @@ import java.awt.event.WindowEvent;
 public class VLogin extends JFrame {
 
     private final PanelLateralLogin panelLateralLogin = new PanelLateralLogin();
+    private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin();
     private String sms;
 
     public VLogin() {
-        super();
+        super("Good Admin");
         this.initComponents();
     }
 
@@ -26,6 +29,7 @@ public class VLogin extends JFrame {
 
         this.add(new PanelTopBotones(this), BorderLayout.NORTH);
         this.add(this.panelLateralLogin, BorderLayout.WEST);
+        this.add(this.panelCenterLogin, BorderLayout.CENTER);
 
         this.esteFrame();
     }
@@ -52,7 +56,7 @@ public class VLogin extends JFrame {
                     }
                 }
         );
-
+        RAgrImg.setIconWindow(this, "Logo-Good-Admin.png");
         this.setVisible(true);
     }
 

@@ -33,7 +33,7 @@ public class PanelLateralLogin extends JPanel {
 
         this.setSize(450, 660);
         this.setPreferredSize(new Dimension(450, 660));
-        this.setBackground(RColores.BLANCO_OPACO);
+        this.setBackground(RColores.BLANCO_MENOS_OPACO);
     }
 
     private void panelesMargenes() {
@@ -45,12 +45,12 @@ public class PanelLateralLogin extends JPanel {
         }
 
         this.panels[0].setPreferredSize(new Dimension(450, 110));
-        this.panels[0].setBackground(RColores.BLANCO_OPACO);
+        this.panels[0].setBackground(RColores.BLANCO_MENOS_OPACO);
         this.add(this.panels[0], BorderLayout.NORTH);
 
         this.panels[1].setPreferredSize(new Dimension(450, 550));
         this.panels[1].setLayout(this.flowLayout);
-        this.panels[1].setBackground(RColores.BLANCO_OPACO);
+        this.panels[1].setBackground(RColores.BLANCO_MENOS_OPACO);
         this.add(this.panels[1], BorderLayout.CENTER);
 
         /*this.panels[2].setPreferredSize(new Dimension(450, 82));
@@ -70,7 +70,7 @@ public class PanelLateralLogin extends JPanel {
         this.pnlBotonesYSms.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
         this.pnlBotonesYSms.setSize(380, 160);
         this.pnlBotonesYSms.setPreferredSize(new Dimension(380, 160));
-        this.pnlBotonesYSms.setBackground(RColores.BLANCO_OPACO);
+        this.pnlBotonesYSms.setBackground(RColores.BLANCO_MENOS_OPACO);
         this.panels[1].add(this.pnlBotonesYSms);
     }
 

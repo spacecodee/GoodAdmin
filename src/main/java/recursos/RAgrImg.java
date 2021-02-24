@@ -35,4 +35,14 @@ public class RAgrImg {
             System.err.println("No existe la imagen");
         }
     }
+
+    public static void setIconWindow(Window ventana, String rutaIcono) {
+        try {
+            ventana.setIconImage((new ImageIcon("src/main/java/img/" + rutaIcono)).getImage());
+        } catch (Exception ex) {
+            System.out.println("Al parecer no existe la imagen\n");
+            ex.printStackTrace(System.out);
+        }
+
+    }
 }
