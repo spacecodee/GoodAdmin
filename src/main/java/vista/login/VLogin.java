@@ -25,7 +25,7 @@ public class VLogin extends JFrame {
 
     private void initComponents() {
         this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.add(new PanelTopBotones(this), BorderLayout.NORTH);
         this.add(this.panelLateralLogin, BorderLayout.WEST);
@@ -48,7 +48,7 @@ public class VLogin extends JFrame {
                         super.windowStateChanged(e);
                         if (e.getSource() == VLogin.this) {
                             if (VLogin.this.getExtendedState() == Frame.MAXIMIZED_BOTH) {
-                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(50);
+                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(174); //espacio entre la imagen y el boton
 
                                 VLogin.this.panelCenterLogin.getGridLayout().setVgap(40);
                                 VLogin.this.panelCenterLogin.getGridLayout().setHgap(40);
@@ -72,7 +72,7 @@ public class VLogin extends JFrame {
 
                                 }
                             } else if (VLogin.this.getHeight() == 720) {
-                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(15);
+                                VLogin.this.panelLateralLogin.getFlowLayout().setVgap(10);
 
                                 VLogin.this.panelCenterLogin.getGridLayout().setVgap(10);
                                 VLogin.this.panelCenterLogin.getGridLayout().setHgap(10);
