@@ -11,6 +11,7 @@ public class RColores {
     public static final Color VERDE_CLARO_OPACO = new Color(187, 231, 212);
     public static final Color BLANCO_OPACO = new Color(228, 228, 234);
     public static final Color BLANCO_MENOS_OPACO = new Color(243, 244, 245);
+    public static final Color BLANCO_MENOS_GRIS = new Color(244, 249, 249);
     public static final Color LADRILLO = new Color(236, 70, 70);
 
 }

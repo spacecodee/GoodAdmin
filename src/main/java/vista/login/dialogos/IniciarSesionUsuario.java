@@ -1,9 +1,11 @@
 package vista.login.dialogos;
 
 import mdlaf.MaterialLookAndFeel;
+import mdlaf.animation.MaterialUIMovement;
 import recursos.RAgrImg;
 import recursos.RColores;
 import recursos.REfectoIniciarFrame;
+import recursos.RFuentes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +15,21 @@ import java.awt.event.MouseEvent;
 public class IniciarSesionUsuario extends JDialog {
 
     private JPanel[] pnlLados;
+    private JPanel[] pnlLadoLogin;
     private JPanel pnlTop;
     private JPanel pnlCentro;
+    private JPanel pnlCentroLogin;
 
     private JLabel lblCerrar;
     private JLabel lblImg;
+    private JLabel lblSms;
+    private JLabel lblOlvidePassword;
+
+    private JTextField txtUser;
+
+    private JPasswordField txtPassword;
+
+    private JButton btnIniciarSesion;
 
     public IniciarSesionUsuario() {
         super();
@@ -31,15 +43,22 @@ public class IniciarSesionUsuario extends JDialog {
         this.panelLados();
         this.panelTopBoton();
         this.lblCerrarDialogo();
-        this.lblImgIlustracion();
 
         this.panelCentro();
+        this.lblImgIlustracion();
+
+        this.panelLadoLogin();
+        this.panelesLadoLogin();
+
+        this.lblMensaje();
+
+        this.formulario();
 
         this.setUndecorated(true);
         this.setSize(700, 420);
         this.setLocationRelativeTo(null);
 
-        REfectoIniciarFrame.iniciarTransparencia(this, 0.9F);
+        REfectoIniciarFrame.iniciarTransparenciaDialogo(this, 0.9F);
 
         this.setVisible(true);
     }
@@ -54,17 +73,18 @@ public class IniciarSesionUsuario extends JDialog {
             this.pnlLados[i].setPreferredSize(new Dimension(307, 420));
             this.pnlLados[i].setBackground(RColores.VERDE_CLARO_OPACO);
 
-            this.add(this.pnlLados[i], BorderLayout.WEST);
-            if (i > 1) {
-                this.pnlLados[i].setSize(390, 420);
+            if (i > 0) {
                 this.pnlLados[i].setLayout(new BorderLayout());
+                this.pnlLados[i].setSize(390, 420);
                 this.pnlLados[i].setPreferredSize(new Dimension(390, 420));
-                this.pnlLados[i].setBackground(RColores.VERDE_CLARO_OPACO);
+                this.pnlLados[i].setBackground(RColores.BLANCO_OPACO);
 
-                this.add(this.pnlLados[i], BorderLayout.CENTER);
             }
-
         }
+
+        //recomendacion: nunca agregar objetos dentro de un cliclo
+        this.add(this.pnlLados[0], BorderLayout.WEST);
+        this.add(this.pnlLados[1], BorderLayout.CENTER);
     }
 
     private void panelTopBoton() {
@@ -99,22 +119,112 @@ public class IniciarSesionUsuario extends JDialog {
         this.pnlTop.add(this.lblCerrar);
     }
 
-    private void lblImgIlustracion() {
-        this.lblImg = new JLabel();
-        this.lblImg.setSize(273, 350);
-        this.lblImg.setPreferredSize(new Dimension(273, 350));
-        RAgrImg.agrImg("login/fondo3.png", this.lblImg);
-
-        this.pnlLados[0].add(this.lblImg, BorderLayout.CENTER);
-    }
-
     private void panelCentro() {
         this.pnlCentro = new JPanel();
+        this.pnlCentro.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 60));
         this.pnlCentro.setSize(307, 267);
         this.pnlCentro.setPreferredSize(new Dimension(307, 267));
         this.pnlCentro.setBackground(RColores.TRANSPARENCIA);
 
         this.pnlLados[0].add(this.pnlCentro, BorderLayout.CENTER);
+    }
+
+    private void lblImgIlustracion() {
+        this.lblImg = new JLabel();
+        this.lblImg.setSize(273, 273);
+        this.lblImg.setPreferredSize(new Dimension(273, 273));
+        RAgrImg.agrImg("login/fondo3.png", this.lblImg);
+
+        this.pnlCentro.add(this.lblImg);
+    }
+
+    private void panelLadoLogin() {
+        this.pnlCentroLogin = new JPanel();
+        this.pnlCentroLogin.setLayout(new BorderLayout());
+        this.pnlCentroLogin.setSize(new Dimension(390, 420));
+        this.pnlCentroLogin.setPreferredSize(new Dimension(390, 420));
+        this.pnlCentroLogin.setBackground(RColores.BLANCO_MENOS_GRIS);
+
+        this.pnlLados[1].add(this.pnlCentroLogin, BorderLayout.CENTER);
+    }
+
+    private void panelesLadoLogin() {
+        this.pnlLadoLogin = new JPanel[2];
+
+        for (var i = 0; i < this.pnlLadoLogin.length; i++) {
+            this.pnlLadoLogin[i] = new JPanel();
+
+            this.pnlLadoLogin[i].setLayout(new FlowLayout(FlowLayout.CENTER, 0, 80));
+            this.pnlLadoLogin[i].setSize(390, 120);
+            this.pnlLadoLogin[i].setPreferredSize(new Dimension(390, 120));
+            this.pnlLadoLogin[i].setBackground(RColores.BLANCO_MENOS_GRIS);
+
+            if (i > 0) {
+                this.pnlLadoLogin[i].setLayout(new FlowLayout(FlowLayout.CENTER, 5, 25));
+                this.pnlLadoLogin[i].setSize(390, 120);
+                this.pnlLadoLogin[i].setPreferredSize(new Dimension(390, 300));
+                this.pnlLadoLogin[i].setBackground(RColores.BLANCO_MENOS_GRIS);
+            }
+
+        }
+
+        this.pnlCentroLogin.add(this.pnlLadoLogin[0], BorderLayout.NORTH);
+        this.pnlCentroLogin.add(this.pnlLadoLogin[1], BorderLayout.CENTER);
+    }
+
+    private void lblMensaje() {
+        this.lblSms = new JLabel("Iniciar Sesión".toUpperCase());
+        this.lblSms.setSize(new Dimension(200, 20));
+        this.lblSms.setPreferredSize(new Dimension(200, 20));
+        this.lblSms.setHorizontalTextPosition(SwingConstants.CENTER);
+        this.lblSms.setFont(RFuentes.getFuentePlana(20));
+        this.lblSms.setForeground(RColores.NEGRO_OPCACO);
+        this.pnlLadoLogin[0].add(this.lblSms);
+    }
+
+    private void formulario() {
+        this.txtUser = new JTextField();
+        this.txtUser.setSize(new Dimension(250, 35));
+        this.txtUser.setPreferredSize(new Dimension(250, 35));
+        this.txtUser.setFont(RFuentes.getFuentePlana(14));
+        this.txtUser.setBackground(RColores.BLANCO_MENOS_GRIS);
+        this.txtUser.setForeground(RColores.NEGRO_OPCACO);
+        this.txtUser.setToolTipText("Usuario");
+
+        this.txtPassword = new JPasswordField();
+        this.txtPassword.setSize(new Dimension(250, 35));
+        this.txtPassword.setPreferredSize(new Dimension(250, 35));
+        this.txtPassword.setFont(RFuentes.getFuentePlana(14));
+        this.txtPassword.setBackground(RColores.BLANCO_MENOS_GRIS);
+        this.txtPassword.setForeground(RColores.NEGRO_OPCACO);
+        this.txtPassword.setToolTipText("Password");
+
+        this.lblOlvidePassword = new JLabel("¿Olvidó su contraseña?");
+        this.lblOlvidePassword.setSize(new Dimension(250, 10));
+        this.lblOlvidePassword.setPreferredSize(new Dimension(250, 12));
+        this.lblOlvidePassword.setFont(RFuentes.getFuentePlana(12));
+        this.lblOlvidePassword.setBackground(RColores.BLANCO_MENOS_GRIS);
+        this.lblOlvidePassword.setForeground(RColores.NEGRO_OPCACO);
+        this.lblOlvidePassword.setHorizontalAlignment(SwingConstants.CENTER);
+        this.lblOlvidePassword.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        this.btnIniciarSesion = new JButton();
+        this.btnIniciarSesion.setSize(250, 40);
+        this.btnIniciarSesion.setBorder(null);
+        this.btnIniciarSesion.setOpaque(false);
+        this.btnIniciarSesion.setFocusable(false);
+        this.btnIniciarSesion.setFocusPainted(false);
+        this.btnIniciarSesion.setContentAreaFilled(false);
+        RAgrImg.agrImg("login/boton-login.png", this.btnIniciarSesion);
+
+        this.btnIniciarSesion.addMouseListener(MaterialUIMovement.getMovement( //elimina el color al presionar el boton
+                this.btnIniciarSesion, RColores.TRANSPARENCIA)
+        );
+
+        this.pnlLadoLogin[1].add(this.txtUser);
+        this.pnlLadoLogin[1].add(this.txtPassword);
+        this.pnlLadoLogin[1].add(this.lblOlvidePassword);
+        this.pnlLadoLogin[1].add(this.btnIniciarSesion);
     }
 
     public static void main(String[] args) {
