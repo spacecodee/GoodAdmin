@@ -49,8 +49,49 @@ public class VLogin extends JFrame {
                         if (e.getSource() == VLogin.this) {
                             if (VLogin.this.getExtendedState() == Frame.MAXIMIZED_BOTH) {
                                 VLogin.this.panelLateralLogin.getFlowLayout().setVgap(50);
+
+                                VLogin.this.panelCenterLogin.getGridLayout().setVgap(40);
+                                VLogin.this.panelCenterLogin.getGridLayout().setHgap(40);
+
+                                for (var i = 0; i < VLogin.this.panelCenterLogin.getLblAvatares().length; i++) {
+                                    VLogin.this.panelCenterLogin.getLblAvatares()[i].setPreferredSize(new Dimension(300, 200));
+                                    VLogin.this.panelCenterLogin.getLblAvatares()[i].setSize(new Dimension(300, 200));
+                                    VLogin.this.panelCenterLogin.getLblAvatares()[i].setHorizontalAlignment(SwingConstants.CENTER);
+
+                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setPreferredSize(new Dimension(300, 40));
+                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setSize(new Dimension(300, 40));
+                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setHorizontalAlignment(SwingConstants.CENTER);
+
+                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(300, 300));
+                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(300, 300));
+
+                                    if (i < 4) {
+                                        VLogin.this.panelCenterLogin.getPnlMargenes()[i].setPreferredSize(new Dimension(80, 80));
+                                        VLogin.this.panelCenterLogin.getPnlMargenes()[i].setSize(new Dimension(80, 80));
+                                    }
+
+                                }
                             } else if (VLogin.this.getHeight() == 720) {
                                 VLogin.this.panelLateralLogin.getFlowLayout().setVgap(15);
+
+                                VLogin.this.panelCenterLogin.getGridLayout().setVgap(10);
+                                VLogin.this.panelCenterLogin.getGridLayout().setHgap(10);
+
+                                for (var i = 0; i < VLogin.this.panelCenterLogin.getLblAvatares().length; i++) {
+                                    VLogin.this.panelCenterLogin.getLblAvatares()[i].setPreferredSize(new Dimension(90, 150));
+                                    VLogin.this.panelCenterLogin.getLblAvatares()[i].setSize(new Dimension(90, 150));
+
+                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setPreferredSize(new Dimension(205, 15));
+                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setSize(new Dimension(205, 15));
+
+                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(205, 205));
+                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(205, 205));
+
+                                    if (i < 4) { //se asignan tamaños a los paneles donde iran los usuarios
+                                        VLogin.this.panelCenterLogin.getPnlMargenes()[i].setPreferredSize(new Dimension(20, 20));
+                                        VLogin.this.panelCenterLogin.getPnlMargenes()[i].setSize(new Dimension(20, 20));
+                                    }
+                                }
                             }
                         }
                     }

@@ -123,4 +123,40 @@ public class PanelCenterLogin extends JPanel {
             this.pnlUsuarios[i].add(this.lblNombreUsuarios[i]);
         }
     }
+
+    public JLabel[] getLblAvatares() {
+        return lblAvatares;
+    }
+
+    public void setLblAvatares(JLabel[] lblAvatares) {
+        this.lblAvatares = lblAvatares;
+    }
+
+    public JLabel[] getLblNombreUsuarios() {
+        return lblNombreUsuarios;
+    }
+
+    public JPanel[] getPnlUsuarios() {
+        return pnlUsuarios;
+    }
+
+    public void setPnlUsuarios(JPanel[] pnlUsuarios) {
+        this.pnlUsuarios = pnlUsuarios;
+    }
+
+    public GridLayout getGridLayout() {
+        return gridLayout;
+    }
+
+    public void setGridLayout(GridLayout gridLayout) {
+        this.gridLayout = gridLayout;
+    }
+
+    public JPanel[] getPnlMargenes() {
+        return pnlMargenes;
+    }
+
+    public void setPnlMargenes(JPanel[] pnlMargenes) {
+        this.pnlMargenes = pnlMargenes;
+    }
 }
