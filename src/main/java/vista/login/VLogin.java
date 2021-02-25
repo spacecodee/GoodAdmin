@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
 public class VLogin extends JFrame {
 
     private final PanelLateralLogin panelLateralLogin = new PanelLateralLogin();
-    private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin();
+    private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this);
     private String sms;
 
     public VLogin() {

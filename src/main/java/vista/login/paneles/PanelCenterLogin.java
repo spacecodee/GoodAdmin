@@ -3,11 +3,17 @@ package vista.login.paneles;
 import recursos.RAgrImg;
 import recursos.RColores;
 import recursos.RFuentes;
+import vista.login.VLogin;
+import vista.login.dialogos.IniciarSesionUsuario;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelCenterLogin extends JPanel {
+
+    private VLogin vLogin;
 
     private JPanel[] pnlMargenes;
     private JPanel[] pnlUsuarios;
@@ -23,8 +29,14 @@ public class PanelCenterLogin extends JPanel {
             new JLabel("Usuario 1"), new JLabel("Usuario 2"), new JLabel("Usuario 3"),
             new JLabel("Usuario 4"), new JLabel("Usuario 5")
     };
+    private IniciarSesionUsuario iniciarSesionUsuario;
 
     public PanelCenterLogin() {
+        super();
+        this.initComponents();
+    }
+
+    public PanelCenterLogin(VLogin vLogin) {
         super();
         this.initComponents();
     }
@@ -104,6 +116,36 @@ public class PanelCenterLogin extends JPanel {
             this.pnlUsuarios[i] = new PanelUsuarios();
             this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.pnlCenter.add(this.pnlUsuarios[i]);
+
+
+            this.pnlUsuarios[i].addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+
+                            /*PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
+                                    "Hola"
+                            );
+
+                            for (var i = 0; i < PanelCenterLogin.this.pnlUsuarios.length; i++) {
+                                PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
+                                        PanelCenterLogin.this.lblNombreUsuarios[i].getText()
+                                );
+                                PanelCenterLogin.this.iniciarSesionUsuario.setVisible(true);
+                                if (PanelCenterLogin.this.iniciarSesionUsuario.isVisible()) {
+                                    break;
+                                }
+                            }*/
+
+                            PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
+                                    PanelCenterLogin.this.vLogin, true
+                            );
+
+                        }
+                    }
+            );
+
         }
     }
 

@@ -36,6 +36,11 @@ public class IniciarSesionUsuario extends JDialog {
         this.initComponents();
     }
 
+    public IniciarSesionUsuario(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        this.initComponents();
+    }
+
     public void initComponents() {
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -234,6 +239,14 @@ public class IniciarSesionUsuario extends JDialog {
             e.printStackTrace();
         }
 
-        new IniciarSesionUsuario();
+        new IniciarSesionUsuario(new JFrame(), true);
+    }
+
+    public JTextField getTxtUser() {
+        return this.txtUser;
+    }
+
+    public void setTxtUser(JTextField txtUser) {
+        this.txtUser = txtUser;
     }
 }
