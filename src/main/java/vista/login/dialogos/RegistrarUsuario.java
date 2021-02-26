@@ -8,11 +8,12 @@ import recursos.REfectoIniciarFrame;
 import recursos.RFuentes;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class IniciarSesionUsuario extends JDialog {
+public class RegistrarUsuario extends JDialog {
 
     private JPanel[] pnlLados;
     private JPanel[] pnlLadoLogin;
@@ -31,12 +32,14 @@ public class IniciarSesionUsuario extends JDialog {
 
     private JButton btnIniciarSesion;
 
-    public IniciarSesionUsuario() {
+    private JComboBox<String> cbxRoles;
+
+    public RegistrarUsuario() {
         super();
         this.initComponents();
     }
 
-    public IniciarSesionUsuario(java.awt.Frame parent, boolean modal) {
+    public RegistrarUsuario(Frame parent, boolean modal) {
         super(parent, modal);
         this.initComponents();
     }
@@ -82,7 +85,7 @@ public class IniciarSesionUsuario extends JDialog {
                 this.pnlLados[i].setLayout(new BorderLayout());
                 this.pnlLados[i].setSize(390, 420);
                 this.pnlLados[i].setPreferredSize(new Dimension(390, 420));
-                this.pnlLados[i].setBackground(RColores.BLANCO_OPACO);
+                this.pnlLados[i].setBackground(RColores.BLANCO_MENOS_GRIS);
 
             }
         }
@@ -114,8 +117,8 @@ public class IniciarSesionUsuario extends JDialog {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        if (e.getSource() == IniciarSesionUsuario.this.lblCerrar) {
-                            IniciarSesionUsuario.this.dispose();
+                        if (e.getSource() == RegistrarUsuario.this.lblCerrar) {
+                            RegistrarUsuario.this.dispose();
                         }
                     }
                 }
@@ -165,7 +168,7 @@ public class IniciarSesionUsuario extends JDialog {
             this.pnlLadoLogin[i].setBackground(RColores.BLANCO_MENOS_GRIS);
 
             if (i > 0) {
-                this.pnlLadoLogin[i].setLayout(new FlowLayout(FlowLayout.CENTER, 5, 25));
+                this.pnlLadoLogin[i].setLayout(new FlowLayout(FlowLayout.CENTER, 5, 20));
                 this.pnlLadoLogin[i].setSize(390, 120);
                 this.pnlLadoLogin[i].setPreferredSize(new Dimension(390, 300));
                 this.pnlLadoLogin[i].setBackground(RColores.BLANCO_MENOS_GRIS);
@@ -178,16 +181,28 @@ public class IniciarSesionUsuario extends JDialog {
     }
 
     private void lblMensaje() {
-        this.lblSms = new JLabel("Iniciar Sesión".toUpperCase());
-        this.lblSms.setSize(new Dimension(200, 20));
-        this.lblSms.setPreferredSize(new Dimension(200, 20));
+        this.lblSms = new JLabel("Registrar un nuevo usuario".toUpperCase());
+        this.lblSms.setSize(new Dimension(314, 20));
+        this.lblSms.setPreferredSize(new Dimension(314, 20));
         this.lblSms.setHorizontalTextPosition(SwingConstants.CENTER);
-        this.lblSms.setFont(RFuentes.getFuentePlana(20));
+        this.lblSms.setFont(RFuentes.getFuentePlana(19));
         this.lblSms.setForeground(RColores.NEGRO_OPCACO);
         this.pnlLadoLogin[0].add(this.lblSms);
     }
 
     private void formulario() {
+        this.cbxRoles = new JComboBox<>(new DefaultComboBoxModel<>(
+                new String[]{
+                        "Administrador", "Usuario"
+                }
+        ));
+        this.cbxRoles.setSize(new Dimension(250, 35));
+        this.cbxRoles.setPreferredSize(new Dimension(250, 35));
+        this.cbxRoles.setBackground(RColores.BLANCO_MENOS_GRIS);
+        this.cbxRoles.setForeground(RColores.NEGRO_OPCACO);
+        this.cbxRoles.setToolTipText("Roles de usuario");
+        this.cbxRoles.setBorder(new LineBorder(RColores.VERDE_CLARO, 2, true));
+
         this.txtUser = new JTextField();
         this.txtUser.setSize(new Dimension(250, 35));
         this.txtUser.setPreferredSize(new Dimension(250, 35));
@@ -220,12 +235,13 @@ public class IniciarSesionUsuario extends JDialog {
         this.btnIniciarSesion.setFocusable(false);
         this.btnIniciarSesion.setFocusPainted(false);
         this.btnIniciarSesion.setContentAreaFilled(false);
-        RAgrImg.agrImg("login/boton-login.png", this.btnIniciarSesion);
+        RAgrImg.agrImg("login/boton-registrar.png", this.btnIniciarSesion);
 
         this.btnIniciarSesion.addMouseListener(MaterialUIMovement.getMovement( //elimina el color al presionar el boton
                 this.btnIniciarSesion, RColores.TRANSPARENCIA)
         );
 
+        this.pnlLadoLogin[1].add(this.cbxRoles);
         this.pnlLadoLogin[1].add(this.txtUser);
         this.pnlLadoLogin[1].add(this.txtPassword);
         this.pnlLadoLogin[1].add(this.lblOlvidePassword);
@@ -239,7 +255,7 @@ public class IniciarSesionUsuario extends JDialog {
             e.printStackTrace();
         }
 
-        new IniciarSesionUsuario();
+        new RegistrarUsuario().setVisible(true);
     }
 
     public JTextField getTxtUser() {

@@ -111,42 +111,38 @@ public class PanelCenterLogin extends JPanel {
 
     private void panelPerfilesUsuarios() {
         this.pnlUsuarios = new JPanel[5];
+        PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
+                PanelCenterLogin.this.vLogin, true
+        );
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.pnlUsuarios[i] = new PanelUsuarios();
             this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.pnlCenter.add(this.pnlUsuarios[i]);
+        }
 
+        for (var i = 0; i < this.pnlUsuarios.length; i++){
 
-            this.pnlUsuarios[i].addMouseListener(
+            int finalI = i; //variabe para recorrer los nombres
+
+            this.pnlUsuarios[i].addMouseListener( //mediante este evento abrimos cada jDialogo, ademas cada dialogo con su usuario en el
                     new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             super.mouseClicked(e);
 
-                            /*PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
-                                    "Hola"
+                            PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
+                                    PanelCenterLogin.this.lblNombreUsuarios[finalI].getText()
                             );
 
-                            for (var i = 0; i < PanelCenterLogin.this.pnlUsuarios.length; i++) {
-                                PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
-                                        PanelCenterLogin.this.lblNombreUsuarios[i].getText()
-                                );
-                                PanelCenterLogin.this.iniciarSesionUsuario.setVisible(true);
-                                if (PanelCenterLogin.this.iniciarSesionUsuario.isVisible()) {
-                                    break;
-                                }
-                            }*/
+                            PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setEnabled(false);
 
-                            PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
-                                    PanelCenterLogin.this.vLogin, true
-                            );
-
+                            PanelCenterLogin.this.iniciarSesionUsuario.setVisible(true);
                         }
                     }
             );
-
         }
+
     }
 
     private void agregarLlblImg() {

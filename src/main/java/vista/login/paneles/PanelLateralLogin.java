@@ -4,11 +4,15 @@ import mdlaf.animation.MaterialUIMovement;
 import recursos.RAgrImg;
 import recursos.RColores;
 import recursos.RFuentes;
+import vista.login.VLogin;
+import vista.login.dialogos.RegistrarUsuario;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PanelLateralLogin extends JPanel {
+
+    private VLogin vLogin;
 
     private JPanel[] panels;
     private JLabel lblImgCard;
@@ -20,6 +24,12 @@ public class PanelLateralLogin extends JPanel {
     public PanelLateralLogin() {
         super();
         this.initComponents();
+    }
+
+    public PanelLateralLogin(VLogin vLogin) {
+        super();
+        this.initComponents();
+        this.vLogin = vLogin;
     }
 
     private void initComponents() {
@@ -87,6 +97,16 @@ public class PanelLateralLogin extends JPanel {
 
         this.btnAgregar.addMouseListener(MaterialUIMovement.getMovement( //elimina el color al presionar el boton
                 this.btnAgregar, RColores.TRANSPARENCIA)
+        );
+
+        this.btnAgregar.addActionListener(
+                e -> {
+                    if (e.getSource() == PanelLateralLogin.this.btnAgregar) {
+                        new RegistrarUsuario(
+                                PanelLateralLogin.this.vLogin, true
+                        ).setVisible(true);
+                    }
+                }
         );
     }
 
