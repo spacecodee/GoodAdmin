@@ -1,5 +1,6 @@
 package vista.login.paneles;
 
+import controlador.login.CLogin;
 import recursos.RAgrImg;
 import recursos.RColores;
 import recursos.RFuentes;
@@ -7,9 +8,11 @@ import vista.login.VLogin;
 import vista.login.dialogos.IniciarSesionUsuario;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class PanelCenterLogin extends JPanel {
 
@@ -25,13 +28,13 @@ public class PanelCenterLogin extends JPanel {
             "login/avatares/usuario1.png", "login/avatares/usuario2.png", "login/avatares/usuario3.png",
             "login/avatares/usuario4.png", "login/avatares/usuario5.png"
     };
-    private final JLabel[] lblNombreUsuarios = {
-            new JLabel("Usuario 1"), new JLabel("Usuario 2"), new JLabel("Usuario 3"),
-            new JLabel("Usuario 4"), new JLabel("Usuario 5")
-    };
     private IniciarSesionUsuario iniciarSesionUsuario;
 
     //automatización
+    private final CLogin cLogin = new CLogin();
+    private List<String> nombreUsuarios = this.cLogin.getNombreUsers();
+    private List<String> nombres = this.cLogin.getNombreUsers();
+    private JLabel[] lblNombres;
 
     public PanelCenterLogin() {
         super();
@@ -50,8 +53,8 @@ public class PanelCenterLogin extends JPanel {
         this.add(this.panelCentro, BorderLayout.CENTER);
         this.margenes2();
         this.panelUsuarios();
-        this.panelPerfilesUsuarios();
-        this.agregarLlblImg();
+        this.panelPerfilesUsuarios(this.cLogin.getTotalUsers());
+        this.agregarLlblImg(this.cLogin.getTotalUsers());
 
         this.setSize(883, 660);
         this.setPreferredSize(new Dimension(883, 660));
@@ -111,50 +114,16 @@ public class PanelCenterLogin extends JPanel {
         this.panelCentro.add(this.pnlCenter, BorderLayout.CENTER);
     }
 
-    private void panelPerfilesUsuarios() {
-        this.pnlUsuarios = new JPanel[5];
-        PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
-                PanelCenterLogin.this.vLogin, true
-        );
-
-        for (var i = 0; i < this.pnlUsuarios.length; i++) {
-            this.pnlUsuarios[i] = new PanelUsuarios();
-            this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
-            this.pnlCenter.add(this.pnlUsuarios[i]);
-        }
-
-        for (var i = 0; i < this.pnlUsuarios.length; i++) {
-
-            int finalI = i; //variabe para recorrer los nombres
-
-            this.pnlUsuarios[i].addMouseListener( //mediante este evento abrimos cada jDialogo, ademas cada dialogo con su usuario en el
-                    new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-
-                            PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
-                                    PanelCenterLogin.this.lblNombreUsuarios[finalI].getText()
-                            );
-
-                            PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setEnabled(false);
-
-                            PanelCenterLogin.this.iniciarSesionUsuario.setVisible(true);
-                        }
-                    }
-            );
-        }
-
-    }
-
     private void panelPerfilesUsuarios(int totalUsuarios) {
         this.pnlUsuarios = new JPanel[totalUsuarios];
+
         PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
                 PanelCenterLogin.this.vLogin, true
         );
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.pnlUsuarios[i] = new PanelUsuarios();
+            this.pnlUsuarios[i].setLayout(new FlowLayout(FlowLayout.CENTER));
             this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.pnlCenter.add(this.pnlUsuarios[i]);
         }
@@ -169,8 +138,10 @@ public class PanelCenterLogin extends JPanel {
                         public void mouseClicked(MouseEvent e) {
                             super.mouseClicked(e);
 
+                            //PanelCenterLogin.this.nombreUsuarios.get(finalI)
+                            //PanelCenterLogin.this.lblNombreUsuarios[finalI].getText()
                             PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
-                                    PanelCenterLogin.this.lblNombreUsuarios[finalI].getText()
+                                    PanelCenterLogin.this.nombreUsuarios.get(finalI)
                             );
 
                             PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setEnabled(false);
@@ -183,8 +154,10 @@ public class PanelCenterLogin extends JPanel {
 
     }
 
-    private void agregarLlblImg() {
-        this.lblAvatares = new JLabel[5];
+    private void agregarLlblImg(int totalUsuarios) {
+        this.lblAvatares = new JLabel[totalUsuarios];
+        this.lblNombres = new JLabel[totalUsuarios];
+
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.lblAvatares[i] = new JLabel();
             this.lblAvatares[i].setSize(new Dimension(90, 150));
@@ -192,11 +165,12 @@ public class PanelCenterLogin extends JPanel {
             RAgrImg.agrImg(this.urlAvatars[i], this.lblAvatares[i]);
             this.pnlUsuarios[i].add(this.lblAvatares[i]);
 
-            this.lblNombreUsuarios[i].setFont(RFuentes.getFuenteNegrita(16));
-            this.lblNombreUsuarios[i].setHorizontalAlignment(SwingConstants.CENTER);
-            this.lblNombreUsuarios[i].setSize(205, 15);
-            this.lblNombreUsuarios[i].setPreferredSize(new Dimension(205, 15));
-            this.pnlUsuarios[i].add(this.lblNombreUsuarios[i]);
+            this.lblNombres[i] = new JLabel(this.nombres.get(i));
+            this.lblNombres[i].setFont(RFuentes.getFuenteNegrita(16));
+            this.lblNombres[i].setHorizontalAlignment(SwingConstants.CENTER);
+            this.lblNombres[i].setSize(280, 15);
+            this.lblNombres[i].setPreferredSize(new Dimension(280, 15));
+            this.pnlUsuarios[i].add(this.lblNombres[i]);
         }
     }
 
@@ -208,8 +182,12 @@ public class PanelCenterLogin extends JPanel {
         this.lblAvatares = lblAvatares;
     }
 
-    public JLabel[] getLblNombreUsuarios() {
-        return lblNombreUsuarios;
+    public JLabel[] getLblNombres() {
+        return lblNombres;
+    }
+
+    public void setLblNombres(JLabel[] lblNombres) {
+        this.lblNombres = lblNombres;
     }
 
     public JPanel[] getPnlUsuarios() {

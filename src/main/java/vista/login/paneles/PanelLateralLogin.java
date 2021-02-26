@@ -1,5 +1,6 @@
 package vista.login.paneles;
 
+import controlador.login.CLogin;
 import mdlaf.animation.MaterialUIMovement;
 import recursos.RAgrImg;
 import recursos.RColores;
@@ -20,6 +21,11 @@ public class PanelLateralLogin extends JPanel {
     private JLabel lblSms;
     private FlowLayout flowLayout;
     private JPanel pnlBotonesYSms;
+
+    private String sms;
+    private int totalUsers;
+
+    private final CLogin cLogin = new CLogin();
 
     public PanelLateralLogin() {
         super();
@@ -111,7 +117,11 @@ public class PanelLateralLogin extends JPanel {
     }
 
     private void agregarLblSms() {
-        this.lblSms = new JLabel("TE QUEDAN: 1, PERFILES DE USUARIOS");
+        this.totalUsers = this.cLogin.getTotalUsers();
+        var resultado = 6 - this.totalUsers;
+
+        this.sms = ("Te quedan: " + resultado + ", perfiles de usuarios").toUpperCase();
+        this.lblSms = new JLabel(this.sms);
         this.lblSms.setSize(300, 16);
         this.lblSms.setFont(RFuentes.getFuentePlana(14));
         this.pnlBotonesYSms.add(this.lblSms);

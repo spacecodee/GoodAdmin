@@ -58,12 +58,12 @@ public class VLogin extends JFrame {
                                     VLogin.this.panelCenterLogin.getLblAvatares()[i].setSize(new Dimension(300, 200));
                                     VLogin.this.panelCenterLogin.getLblAvatares()[i].setHorizontalAlignment(SwingConstants.CENTER);
 
-                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setPreferredSize(new Dimension(300, 40));
-                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setSize(new Dimension(300, 40));
-                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setHorizontalAlignment(SwingConstants.CENTER);
+                                    VLogin.this.panelCenterLogin.getLblNombres()[i].setPreferredSize(new Dimension(400, 40));
+                                    VLogin.this.panelCenterLogin.getLblNombres()[i].setSize(new Dimension(400, 40));
+                                    VLogin.this.panelCenterLogin.getLblNombres()[i].setHorizontalAlignment(SwingConstants.CENTER);
 
-                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(300, 300));
-                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(300, 300));
+                                    //VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(300, 300));
+                                    //VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(300, 300));
 
                                     if (i < 4) {
                                         VLogin.this.panelCenterLogin.getPnlMargenes()[i].setPreferredSize(new Dimension(80, 80));
@@ -81,11 +81,11 @@ public class VLogin extends JFrame {
                                     VLogin.this.panelCenterLogin.getLblAvatares()[i].setPreferredSize(new Dimension(90, 150));
                                     VLogin.this.panelCenterLogin.getLblAvatares()[i].setSize(new Dimension(90, 150));
 
-                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setPreferredSize(new Dimension(205, 15));
-                                    VLogin.this.panelCenterLogin.getLblNombreUsuarios()[i].setSize(new Dimension(205, 15));
+                                    VLogin.this.panelCenterLogin.getLblNombres()[i].setPreferredSize(new Dimension(280, 15));
+                                    VLogin.this.panelCenterLogin.getLblNombres()[i].setSize(new Dimension(280, 15));
 
-                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(205, 205));
-                                    VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(205, 205));
+                                    //VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setPreferredSize(new Dimension(280, 280));
+                                    //VLogin.this.panelCenterLogin.getPnlUsuarios()[i].setSize(new Dimension(280, 280));
 
                                     if (i < 4) { //se asignan tamaños a los paneles donde iran los usuarios
                                         VLogin.this.panelCenterLogin.getPnlMargenes()[i].setPreferredSize(new Dimension(20, 20));

@@ -3,7 +3,7 @@ package sql;
 import java.sql.*;
 
 public class Conexion {
-    private static final String JDBC_BD = "";
+    private static final String JDBC_BD = "good-admin";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "RONNYharol07";
     private static final String JDBC_REQUERIMIENTOS = "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
@@ -27,5 +27,6 @@ public class Conexion {
 
     public static void close(Connection conn) throws SQLException {
         conn.close();
+        System.out.println("Cerrada");
     }
 }
