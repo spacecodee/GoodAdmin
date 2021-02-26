@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CLogin {
@@ -39,8 +38,8 @@ public class CLogin {
         return totalUsuarios;
     }
 
-    public List<String> getNombreUsers() {
-        List<String> nombreUsuarios = new ArrayList<>();
+    public List<String> getNombrePersonas() {
+        List<String> nombrePersonas = null;
 
         try {
             this.con = Conexion.getConnection();
@@ -51,13 +50,34 @@ public class CLogin {
 
             this.sLogin = new SLogin(this.con);
 
-            nombreUsuarios = this.sLogin.nombreUsuarios();
+            nombrePersonas = this.sLogin.nombrePersonas();
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
 
+        return nombrePersonas;
+    }
+
+    public List<String> getNombreUsers() {
+        List<String> nombreUsuarios = null;
+
+        try {
+            this.con = Conexion.getConnection();
+
+            if (this.con.getAutoCommit()) {
+                this.con.setAutoCommit(false);
+            }
+
+            this.sLogin = new SLogin();
+
+            nombreUsuarios = this.sLogin.nombreUsuarios();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+
         return nombreUsuarios;
     }
+
 
     public List<ImageIcon> imgAvatars() {
         List<ImageIcon> imageIcons = null;

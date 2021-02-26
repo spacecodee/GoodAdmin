@@ -1,9 +1,8 @@
 package modelo.genericas;
 
-import java.util.Arrays;
-
 public class MPersona {
     protected int idPersona;
+    private byte[] foto;
     protected String nombre;
     protected String apellidos;
     protected String correo;
@@ -33,6 +32,14 @@ public class MPersona {
 
     public void setIdPersona(int idPersona) {
         this.idPersona = idPersona;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public String getNombre() {

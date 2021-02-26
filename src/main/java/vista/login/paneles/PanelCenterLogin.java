@@ -7,7 +7,6 @@ import vista.login.VLogin;
 import vista.login.dialogos.IniciarSesionUsuario;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,16 +22,12 @@ public class PanelCenterLogin extends JPanel {
     private final PanelCentro panelCentro = new PanelCentro();
     private GridLayout gridLayout;
     private JLabel[] lblAvatares;
-    private final String[] urlAvatars = {
-            "login/avatares/usuario1.png", "login/avatares/usuario2.png", "login/avatares/usuario3.png",
-            "login/avatares/usuario4.png", "login/avatares/usuario5.png"
-    };
     private IniciarSesionUsuario iniciarSesionUsuario;
 
     //automatización
     private final CLogin cLogin = new CLogin();
+    private final List<String> nombrePersonas = this.cLogin.getNombrePersonas();
     private final List<String> nombreUsuarios = this.cLogin.getNombreUsers();
-    private final List<String> nombres = this.cLogin.getNombreUsers();
     private JLabel[] lblNombres;
     private List<ImageIcon> imgs;
 
@@ -44,6 +39,7 @@ public class PanelCenterLogin extends JPanel {
     public PanelCenterLogin(VLogin vLogin) {
         super();
         this.initComponents();
+        this.vLogin = vLogin;
     }
 
     private void initComponents() {
@@ -123,7 +119,7 @@ public class PanelCenterLogin extends JPanel {
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.pnlUsuarios[i] = new PanelUsuarios();
-            this.pnlUsuarios[i].setLayout(new FlowLayout(FlowLayout.CENTER));
+            this.pnlUsuarios[i].setLayout(new FlowLayout(FlowLayout.CENTER, 10, 15));
             this.pnlUsuarios[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.pnlCenter.add(this.pnlUsuarios[i]);
         }
@@ -138,8 +134,6 @@ public class PanelCenterLogin extends JPanel {
                         public void mouseClicked(MouseEvent e) {
                             super.mouseClicked(e);
 
-                            //PanelCenterLogin.this.nombreUsuarios.get(finalI)
-                            //PanelCenterLogin.this.lblNombreUsuarios[finalI].getText()
                             PanelCenterLogin.this.iniciarSesionUsuario.getTxtUser().setText(
                                     PanelCenterLogin.this.nombreUsuarios.get(finalI)
                             );
@@ -166,11 +160,11 @@ public class PanelCenterLogin extends JPanel {
             this.lblAvatares[i].setIcon(this.imgs.get(i));
             this.pnlUsuarios[i].add(this.lblAvatares[i]);
 
-            this.lblNombres[i] = new JLabel(this.nombres.get(i));
+            this.lblNombres[i] = new JLabel(this.nombrePersonas.get(i));
             this.lblNombres[i].setFont(RFuentes.getFuenteNegrita(16));
             this.lblNombres[i].setHorizontalAlignment(SwingConstants.CENTER);
-            this.lblNombres[i].setSize(280, 15);
-            this.lblNombres[i].setPreferredSize(new Dimension(280, 15));
+            this.lblNombres[i].setSize(250, 20);
+            this.lblNombres[i].setPreferredSize(new Dimension(250, 20));
             this.pnlUsuarios[i].add(this.lblNombres[i]);
         }
     }
@@ -179,39 +173,19 @@ public class PanelCenterLogin extends JPanel {
         return lblAvatares;
     }
 
-    public void setLblAvatares(JLabel[] lblAvatares) {
-        this.lblAvatares = lblAvatares;
-    }
-
     public JLabel[] getLblNombres() {
         return lblNombres;
-    }
-
-    public void setLblNombres(JLabel[] lblNombres) {
-        this.lblNombres = lblNombres;
-    }
-
-    public JPanel[] getPnlUsuarios() {
-        return pnlUsuarios;
-    }
-
-    public void setPnlUsuarios(JPanel[] pnlUsuarios) {
-        this.pnlUsuarios = pnlUsuarios;
     }
 
     public GridLayout getGridLayout() {
         return gridLayout;
     }
 
-    public void setGridLayout(GridLayout gridLayout) {
-        this.gridLayout = gridLayout;
-    }
-
     public JPanel[] getPnlMargenes() {
         return pnlMargenes;
     }
 
-    public void setPnlMargenes(JPanel[] pnlMargenes) {
-        this.pnlMargenes = pnlMargenes;
+    public JPanel[] getPnlUsuarios() {
+        return pnlUsuarios;
     }
 }

@@ -8,7 +8,7 @@ public class TestContadorUsuarios {
 
         CLogin cLogin = new CLogin();
 
-        File file = new File("src/main/java/img/login/avatares/usuario1.png");
-        cLogin.actualizar(file, 3);
+        File file = new File("src/main/java/img/login/avatares/usuario6.png");
+        cLogin.actualizar(file, 6);
     }
 }

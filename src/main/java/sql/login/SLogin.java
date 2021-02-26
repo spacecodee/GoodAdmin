@@ -22,7 +22,8 @@ public class SLogin {
 
     private static final String SQL_SELECT = "SELECT * FROM usuarios";
     private static final String SQL_SELECT_TOTAL_USERS = "SELECT COUNT(*) AS Cantidad FROM usuarios";
-    private static final String SQL_SELECT_NOMBRE_USERS = "SELECT nombre FROM personas";
+    private static final String SQL_SELECT_NOMBRE_PERSONA = "SELECT nombre FROM personas";
+    private static final String SQL_SELECT_USUARIO_USER = "SELECT usuario FROM usuarios";
     private static final String SQL_SELECT_FOTO_USERS = "SELECT foto FROM personas";
     private static final String SQL_INSERT = "INSERT INTO persona (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE idPersona = ?";
@@ -59,7 +60,7 @@ public class SLogin {
         return totalUsers;
     }
 
-    public List<String> nombreUsuarios() throws SQLException {
+    public List<String> nombrePersonas() throws SQLException {
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet res = null;
@@ -68,11 +69,32 @@ public class SLogin {
 
         try {
             con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
-            pst = con.prepareStatement(SLogin.SQL_SELECT_NOMBRE_USERS);
+            pst = con.prepareStatement(SLogin.SQL_SELECT_NOMBRE_PERSONA);
             res = pst.executeQuery();
 
             while (res.next())
                 nombreUsers.add(res.getString("nombre"));
+
+        } finally {
+            cerrarConexiones(con, pst, res);
+        }
+
+        return nombreUsers;
+    }
+
+    public List<String> nombreUsuarios() throws SQLException {
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet res = null;
+        List<String> nombreUsers = new ArrayList<>();
+
+        try {
+            con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+            pst = con.prepareStatement(SLogin.SQL_SELECT_USUARIO_USER);
+            res = pst.executeQuery();
+
+            while (res.next())
+                nombreUsers.add(res.getString("usuario"));
 
         } finally {
             cerrarConexiones(con, pst, res);
