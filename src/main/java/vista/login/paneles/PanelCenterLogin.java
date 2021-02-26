@@ -1,7 +1,6 @@
 package vista.login.paneles;
 
 import controlador.login.CLogin;
-import recursos.RAgrImg;
 import recursos.RColores;
 import recursos.RFuentes;
 import vista.login.VLogin;
@@ -32,9 +31,10 @@ public class PanelCenterLogin extends JPanel {
 
     //automatización
     private final CLogin cLogin = new CLogin();
-    private List<String> nombreUsuarios = this.cLogin.getNombreUsers();
-    private List<String> nombres = this.cLogin.getNombreUsers();
+    private final List<String> nombreUsuarios = this.cLogin.getNombreUsers();
+    private final List<String> nombres = this.cLogin.getNombreUsers();
     private JLabel[] lblNombres;
+    private List<ImageIcon> imgs;
 
     public PanelCenterLogin() {
         super();
@@ -157,12 +157,13 @@ public class PanelCenterLogin extends JPanel {
     private void agregarLlblImg(int totalUsuarios) {
         this.lblAvatares = new JLabel[totalUsuarios];
         this.lblNombres = new JLabel[totalUsuarios];
+        this.imgs = this.cLogin.imgAvatars();
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
             this.lblAvatares[i] = new JLabel();
             this.lblAvatares[i].setSize(new Dimension(90, 150));
             this.lblAvatares[i].setPreferredSize(new Dimension(90, 150));
-            RAgrImg.agrImg(this.urlAvatars[i], this.lblAvatares[i]);
+            this.lblAvatares[i].setIcon(this.imgs.get(i));
             this.pnlUsuarios[i].add(this.lblAvatares[i]);
 
             this.lblNombres[i] = new JLabel(this.nombres.get(i));

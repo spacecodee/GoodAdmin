@@ -43,6 +43,5 @@ public class RAgrImg {
             System.out.println("Al parecer no existe la imagen\n");
             ex.printStackTrace(System.out);
         }
-
     }
 }

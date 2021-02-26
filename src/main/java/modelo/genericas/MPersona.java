@@ -1,5 +1,7 @@
 package modelo.genericas;
 
+import java.util.Arrays;
+
 public class MPersona {
     protected int idPersona;
     protected String nombre;
@@ -8,10 +10,6 @@ public class MPersona {
     protected int telefono;
 
     public MPersona() {
-    }
-
-    public MPersona(int idPersona) {
-        this.idPersona = idPersona;
     }
 
     public MPersona(int idPersona, String nombre, String apellidos, String correo, int telefono) {
@@ -71,7 +69,7 @@ public class MPersona {
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "MPersona{" +
                 "idPersona=" + idPersona +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +

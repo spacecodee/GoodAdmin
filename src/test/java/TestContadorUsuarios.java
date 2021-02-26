@@ -1,12 +1,14 @@
 import controlador.login.CLogin;
-import sql.login.SLogin;
+
+import java.io.File;
 
 public class TestContadorUsuarios {
 
     public static void main(String[] args) {
-        SLogin sLogin = new SLogin();
+
         CLogin cLogin = new CLogin();
 
-        System.out.println(cLogin.getTotalUsers());
+        File file = new File("src/main/java/img/login/avatares/usuario1.png");
+        cLogin.actualizar(file, 3);
     }
 }

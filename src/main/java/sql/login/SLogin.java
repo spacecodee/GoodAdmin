@@ -1,7 +1,14 @@
 package sql.login;
 
+import modelo.genericas.MPersona;
 import sql.Conexion;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +23,10 @@ public class SLogin {
     private static final String SQL_SELECT = "SELECT * FROM usuarios";
     private static final String SQL_SELECT_TOTAL_USERS = "SELECT COUNT(*) AS Cantidad FROM usuarios";
     private static final String SQL_SELECT_NOMBRE_USERS = "SELECT nombre FROM personas";
+    private static final String SQL_SELECT_FOTO_USERS = "SELECT foto FROM personas";
     private static final String SQL_INSERT = "INSERT INTO persona (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE idPersona = ?";
+    private static final String SQL_UPDATE_FOTO = "UPDATE personas SET foto = ? WHERE id_persona = ?";
     private static final String SQL_DELETE = "DELETE FROM persona WHERE idPersona = ?";
 
     public SLogin() {
@@ -72,10 +81,74 @@ public class SLogin {
         return nombreUsers;
     }
 
+    public List<ImageIcon> imgs() throws SQLException, IOException {
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet res = null;
+
+        List<ImageIcon> imagens = new ArrayList<>();
+
+        InputStream inputStream;
+        ImageIcon icon;
+
+        try {
+            con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+            pst = con.prepareStatement(SLogin.SQL_SELECT_FOTO_USERS);
+            res = pst.executeQuery();
+
+            while (res.next()) {
+                inputStream = res.getBinaryStream("foto");
+
+                BufferedImage bufferedImage = ImageIO.read(inputStream);
+                icon = new ImageIcon(bufferedImage);
+
+                Image img = icon.getImage();
+                Image newImg = img.getScaledInstance(90, 150, Image.SCALE_SMOOTH);
+                ImageIcon imageIcon = new ImageIcon(newImg);
+
+                imagens.add(imageIcon);
+            }
+
+        } finally {
+            cerrarConexiones(con, pst, res);
+        }
+
+        return imagens;
+    }
+
+    public void actualizarPersona(MPersona mPersona) throws SQLException {
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet res = null;
+        //SQL_UPDATE_FOTO
+
+        try {
+            con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+            pst = con.prepareStatement(SLogin.SQL_UPDATE_FOTO);
+            pst.setBytes(1, mPersona.getFoto());
+            pst.setInt(2, mPersona.getIdPersona());
+            pst.executeUpdate();
+        } finally {
+            cerrarConexiones(con, pst);
+        }
+
+    }
+
     private void cerrarConexiones(Connection con, PreparedStatement pst, ResultSet res) {
         try {
             assert res != null;
             Conexion.close(res);
+            Conexion.close(pst);
+            if (this.conexionTransaccional == null) {
+                Conexion.close(con);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
+
+    private void cerrarConexiones(Connection con, PreparedStatement pst) {
+        try {
             Conexion.close(pst);
             if (this.conexionTransaccional == null) {
                 Conexion.close(con);

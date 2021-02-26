@@ -1,8 +1,14 @@
 package controlador.login;
 
+import modelo.genericas.MPersona;
 import sql.Conexion;
 import sql.login.SLogin;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,5 +57,51 @@ public class CLogin {
         }
 
         return nombreUsuarios;
+    }
+
+    public List<ImageIcon> imgAvatars() {
+        List<ImageIcon> imageIcons = null;
+
+        try {
+
+            this.con = Conexion.getConnection();
+
+            if (this.con.getAutoCommit()) {
+                this.con.setAutoCommit(false);
+            }
+
+            this.sLogin = new SLogin(this.con);
+            imageIcons = this.sLogin.imgs();
+
+        } catch (SQLException | IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+
+        return imageIcons;
+    }
+
+    public void actualizar(File ruta, int id) {
+        MPersona mPersona = new MPersona();
+        this.sLogin = new SLogin(this.con);
+
+        mPersona.setIdPersona(id);
+        try {
+            this.con = Conexion.getConnection();
+
+            if (this.con.getAutoCommit()) {
+                this.con.setAutoCommit(false);
+            }
+
+            byte[] icono = new byte[(int) ruta.length()];
+            InputStream inputStream = new FileInputStream(ruta);
+            inputStream.read(icono);
+            mPersona.setFoto(icono);
+
+            sLogin.actualizarPersona(mPersona);
+            System.out.println("Persona modificada");
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+
     }
 }
