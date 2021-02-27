@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
 public class VLogin extends JFrame {
 
     private final CLogin cLogin = new CLogin();
-    private final PanelLateralLogin panelLateralLogin = new PanelLateralLogin();
+    private final PanelLateralLogin panelLateralLogin = new PanelLateralLogin(this);
     //private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this);
     private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this, this.cLogin.getTotalUsers());
     private String sms;
@@ -34,6 +34,8 @@ public class VLogin extends JFrame {
         this.add(new PanelTopBotones(this), BorderLayout.NORTH);
         this.add(this.panelLateralLogin, BorderLayout.WEST);
         this.add(this.panelCenterLogin, BorderLayout.CENTER);
+
+        //this.panelLateralLogin.getLblSms().setText("XDXE");
 
         this.esteFrame();
     }
@@ -114,6 +116,10 @@ public class VLogin extends JFrame {
 
         RAgrImg.setIconWindow(this, "Logo-Good-Admin.png");
         this.setVisible(true);
+    }
+
+    public PanelCenterLogin getPanelCenterLogin() {
+        return panelCenterLogin;
     }
 
     public static void main(String[] args) {

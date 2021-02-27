@@ -91,6 +91,7 @@ public class PanelLateralLogin extends JPanel {
     }
 
     private void agregarBoton() {
+
         this.btnAgregar = new JButton();
         this.btnAgregar.setSize(300, 50);
         this.btnAgregar.setBorder(null);

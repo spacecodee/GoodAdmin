@@ -2,6 +2,7 @@ package controlador.login;
 
 import modelo.genericas.MPersona;
 import modelo.login.MRolesUsers;
+import modelo.login.MUsuario;
 import sql.Conexion;
 import sql.login.SLogin;
 
@@ -128,6 +129,21 @@ public class CLogin {
         }
 
         return imageIcons;
+    }
+
+    public void agregarUsuario(JTextField txtUser, JPasswordField pwsUser, JComboBox cbxRoles) {
+        MRolesUsers mRolesUsers = (MRolesUsers) cbxRoles.getSelectedItem();
+
+        MUsuario mUsuario = new MUsuario(txtUser.getText().trim(), pwsUser.getText().trim(), mRolesUsers.getIdRoles());
+        System.out.println(pwsUser.getPassword());
+
+        try {
+            if (this.sLogin.agregarUsuario(mUsuario)) {
+                JOptionPane.showMessageDialog(null, "Usuario Agregado");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
     }
 
     public void actualizar(File ruta, int id) {

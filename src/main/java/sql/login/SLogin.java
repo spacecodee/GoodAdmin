@@ -2,6 +2,7 @@ package sql.login;
 
 import modelo.genericas.MPersona;
 import modelo.login.MRolesUsers;
+import modelo.login.MUsuario;
 import sql.Conexion;
 
 import javax.imageio.ImageIO;
@@ -26,10 +27,15 @@ public class SLogin {
     private static final String SQL_SELECT_TOTAL_USERS = "SELECT COUNT(*) AS Cantidad FROM usuarios";
     private static final String SQL_SELECT_NOMBRE_PERSONA = "SELECT nombre FROM personas";
     private static final String SQL_SELECT_USUARIO_USER = "SELECT usuario FROM usuarios";
-    private static final String SQL_SELECT_FOTO_USERS = "SELECT foto FROM personas";
-    private static final String SQL_INSERT = "INSERT INTO persona (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE idPersona = ?";
+    private static final String SQL_SELECT_FOTO_USERS = "SELECT foto FROM usuarios";
+    private static final String SQL_INSERT = "INSERT INTO persona (nombre, apellido, email, telefono) " +
+            "VALUES (?, ?, ?, ?)";
+    private static final String SQL_INSERT_USER = "INSERT INTO usuarios (usuario, password, idRoll) " +
+            "VALUES (?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? " +
+            "WHERE idPersona = ?";
     private static final String SQL_UPDATE_FOTO = "UPDATE personas SET foto = ? WHERE id_persona = ?";
+    private static final String SQL_UPDATE_FOTO_USER = "UPDATE usuarios SET foto = ? WHERE id_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM persona WHERE idPersona = ?";
 
     public SLogin() {
@@ -172,6 +178,26 @@ public class SLogin {
         return mRolesUsers;
     }
 
+    public boolean agregarUsuario(MUsuario mUsuario) throws SQLException {
+        Connection con = null;
+        PreparedStatement pst = null;
+
+        try {
+            con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+            pst = con.prepareStatement(SLogin.SQL_INSERT_USER);
+
+            pst.setString(1, mUsuario.getUsuario());
+            pst.setString(2, mUsuario.getPasswor());
+            pst.setInt(3, mUsuario.getIdRoll());
+
+            pst.executeUpdate();
+
+            return true;
+        } finally {
+            cerrarConexiones(con, pst);
+        }
+    }
+
     public void actualizarPersona(MPersona mPersona) throws SQLException {
         Connection con = null;
         PreparedStatement pst = null;
@@ -180,7 +206,7 @@ public class SLogin {
 
         try {
             con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
-            pst = con.prepareStatement(SLogin.SQL_UPDATE_FOTO);
+            pst = con.prepareStatement(SLogin.SQL_UPDATE_FOTO_USER);
             pst.setBytes(1, mPersona.getFoto());
             pst.setInt(2, mPersona.getIdPersona());
             pst.executeUpdate();

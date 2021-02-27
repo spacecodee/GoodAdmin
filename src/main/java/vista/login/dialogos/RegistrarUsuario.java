@@ -245,6 +245,17 @@ public class RegistrarUsuario extends JDialog {
                 this.btnIniciarSesion, RColores.TRANSPARENCIA)
         );
 
+        this.btnIniciarSesion.addActionListener(
+                e -> {
+                    if (e.getSource() == RegistrarUsuario.this.btnIniciarSesion) {
+                        RegistrarUsuario.this.cLogin.agregarUsuario(
+                                RegistrarUsuario.this.txtUser, RegistrarUsuario.this.txtPassword, RegistrarUsuario.this.cbxRoles
+                        );
+                    }
+
+                }
+        );
+
         this.pnlLadoLogin[1].add(this.cbxRoles);
         this.pnlLadoLogin[1].add(this.txtUser);
         this.pnlLadoLogin[1].add(this.txtPassword);
@@ -269,4 +280,5 @@ public class RegistrarUsuario extends JDialog {
     public void setTxtUser(JTextField txtUser) {
         this.txtUser = txtUser;
     }
+
 }
