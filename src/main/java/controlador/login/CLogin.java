@@ -19,7 +19,7 @@ public class CLogin {
 
     private Connection con = null;
     private SLogin sLogin;
-    private ArrayList<MRolesUsers> mRolesUsers;
+    //private ArrayList<MRolesUsers> mRolesUsers;
 
     public CLogin() {
 
@@ -86,6 +86,7 @@ public class CLogin {
     }
 
     public void llenarCbx(JComboBox<MRolesUsers> cbxRoles) {
+        ArrayList<MRolesUsers> mRolesUsers;
         cbxRoles.removeAllItems();
         try {
 
@@ -97,11 +98,11 @@ public class CLogin {
 
             this.sLogin = new SLogin();
 
-            this.mRolesUsers = this.sLogin.mRolesUsers();
+            mRolesUsers = this.sLogin.mRolesUsers();
 
-            for (Object mRolesUser : this.mRolesUsers) {
-                MRolesUsers mRolesUsers = (MRolesUsers) mRolesUser;
-                cbxRoles.addItem(mRolesUsers);
+            for (Object mRolesUser : mRolesUsers) {
+                MRolesUsers mRolesU = (MRolesUsers) mRolesUser;
+                cbxRoles.addItem(mRolesU);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
