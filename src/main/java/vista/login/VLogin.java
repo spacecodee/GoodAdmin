@@ -1,5 +1,6 @@
 package vista.login;
 
+import controlador.login.CLogin;
 import mdlaf.MaterialLookAndFeel;
 import recursos.RAgrImg;
 import recursos.REfectoIniciarFrame;
@@ -15,8 +16,10 @@ import java.awt.event.WindowEvent;
 
 public class VLogin extends JFrame {
 
+    private final CLogin cLogin = new CLogin();
     private final PanelLateralLogin panelLateralLogin = new PanelLateralLogin();
-    private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this);
+    //private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this);
+    private final PanelCenterLogin panelCenterLogin = new PanelCenterLogin(this, this.cLogin.getTotalUsers());
     private String sms;
 
     public VLogin() {

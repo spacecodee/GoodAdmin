@@ -16,6 +16,8 @@ public class PanelCenterLogin extends JPanel {
 
     private VLogin vLogin;
 
+    private int totalUsrs;
+
     private JPanel[] pnlMargenes;
     private JPanel[] pnlUsuarios;
     private JPanel pnlCenter;
@@ -33,24 +35,32 @@ public class PanelCenterLogin extends JPanel {
 
     public PanelCenterLogin() {
         super();
-        this.initComponents();
+        this.initComponents(0);
     }
 
     public PanelCenterLogin(VLogin vLogin) {
         super();
-        this.initComponents();
+        this.initComponents(0);
         this.vLogin = vLogin;
     }
 
-    private void initComponents() {
+    public PanelCenterLogin(VLogin vLogin, int totalUsrs) {
+        super();
+        this.initComponents(totalUsrs);
+        this.vLogin = vLogin;
+        this.totalUsrs = totalUsrs;
+    }
+
+    private void initComponents(int totalUsrs) {
+        this.totalUsrs = totalUsrs;
         this.setLayout(new BorderLayout());
 
         this.margenes();
         this.add(this.panelCentro, BorderLayout.CENTER);
         this.margenes2();
         this.panelUsuarios();
-        this.panelPerfilesUsuarios(this.cLogin.getTotalUsers());
-        this.agregarLlblImg(this.cLogin.getTotalUsers());
+        this.panelPerfilesUsuarios();
+        this.agregarLlblImg();
 
         this.setSize(883, 660);
         this.setPreferredSize(new Dimension(883, 660));
@@ -110,8 +120,8 @@ public class PanelCenterLogin extends JPanel {
         this.panelCentro.add(this.pnlCenter, BorderLayout.CENTER);
     }
 
-    private void panelPerfilesUsuarios(int totalUsuarios) {
-        this.pnlUsuarios = new JPanel[totalUsuarios];
+    private void panelPerfilesUsuarios() {
+        this.pnlUsuarios = new JPanel[this.totalUsrs];
 
         PanelCenterLogin.this.iniciarSesionUsuario = new IniciarSesionUsuario(
                 PanelCenterLogin.this.vLogin, true
@@ -148,9 +158,9 @@ public class PanelCenterLogin extends JPanel {
 
     }
 
-    private void agregarLlblImg(int totalUsuarios) {
-        this.lblAvatares = new JLabel[totalUsuarios];
-        this.lblNombres = new JLabel[totalUsuarios];
+    private void agregarLlblImg() {
+        this.lblAvatares = new JLabel[this.totalUsrs];
+        this.lblNombres = new JLabel[this.totalUsrs];
         this.imgs = this.cLogin.imgAvatars();
 
         for (var i = 0; i < this.pnlUsuarios.length; i++) {
@@ -167,6 +177,14 @@ public class PanelCenterLogin extends JPanel {
             this.lblNombres[i].setPreferredSize(new Dimension(250, 20));
             this.pnlUsuarios[i].add(this.lblNombres[i]);
         }
+    }
+
+    public int getTotalUsrs() {
+        return totalUsrs;
+    }
+
+    public void setTotalUsrs(int totalUsrs) {
+        this.totalUsrs = totalUsrs;
     }
 
     public JLabel[] getLblAvatares() {
