@@ -1,6 +1,7 @@
 package controlador.login;
 
 import modelo.genericas.MPersona;
+import modelo.login.MRolesUsers;
 import sql.Conexion;
 import sql.login.SLogin;
 
@@ -11,12 +12,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CLogin {
 
     private Connection con = null;
     private SLogin sLogin;
+    private ArrayList<MRolesUsers> mRolesUsers;
+
+    public CLogin() {
+
+    }
 
     public int getTotalUsers() {
         int totalUsuarios = 0;
@@ -78,6 +85,28 @@ public class CLogin {
         return nombreUsuarios;
     }
 
+    public void llenarCbx(JComboBox<MRolesUsers> cbxRoles) {
+        cbxRoles.removeAllItems();
+        try {
+
+            this.con = Conexion.getConnection();
+
+            if (this.con.getAutoCommit()) {
+                this.con.setAutoCommit(false);
+            }
+
+            this.sLogin = new SLogin();
+
+            this.mRolesUsers = this.sLogin.mRolesUsers();
+
+            for (Object mRolesUser : this.mRolesUsers) {
+                MRolesUsers mRolesUsers = (MRolesUsers) mRolesUser;
+                cbxRoles.addItem(mRolesUsers);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
 
     public List<ImageIcon> imgAvatars() {
         List<ImageIcon> imageIcons = null;

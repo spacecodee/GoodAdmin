@@ -1,5 +1,6 @@
 package vista.login.dialogos;
 
+import controlador.login.CLogin;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.animation.MaterialUIMovement;
 import recursos.RAgrImg;
@@ -32,7 +33,9 @@ public class RegistrarUsuario extends JDialog {
 
     private JButton btnIniciarSesion;
 
-    private JComboBox<String> cbxRoles;
+    private JComboBox cbxRoles;
+
+    private final CLogin cLogin = new CLogin();
 
     public RegistrarUsuario() {
         super();
@@ -61,6 +64,7 @@ public class RegistrarUsuario extends JDialog {
         this.lblMensaje();
 
         this.formulario();
+        this.cLogin.llenarCbx(this.cbxRoles);
 
         this.setUndecorated(true);
         this.setSize(700, 420);
@@ -193,7 +197,7 @@ public class RegistrarUsuario extends JDialog {
     private void formulario() {
         this.cbxRoles = new JComboBox<>(new DefaultComboBoxModel<>(
                 new String[]{
-                        "Administrador", "Usuario"
+                        "Selecciona"
                 }
         ));
         this.cbxRoles.setSize(new Dimension(250, 35));

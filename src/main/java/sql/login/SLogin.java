@@ -1,6 +1,7 @@
 package sql.login;
 
 import modelo.genericas.MPersona;
+import modelo.login.MRolesUsers;
 import sql.Conexion;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,7 @@ public class SLogin {
     private Connection conexionTransaccional;
 
     private static final String SQL_SELECT = "SELECT * FROM usuarios";
+    private static final String SQL_SELECT_ROLES_USERS = "SELECT id_roll, nombre FROM rolesusuarios";
     private static final String SQL_SELECT_TOTAL_USERS = "SELECT COUNT(*) AS Cantidad FROM usuarios";
     private static final String SQL_SELECT_NOMBRE_PERSONA = "SELECT nombre FROM personas";
     private static final String SQL_SELECT_USUARIO_USER = "SELECT usuario FROM usuarios";
@@ -136,6 +138,38 @@ public class SLogin {
         }
 
         return imagens;
+    }
+
+    public ArrayList<MRolesUsers> mRolesUsers() throws SQLException {
+        ArrayList<MRolesUsers> mRolesUsers = new ArrayList<>();
+        MRolesUsers mRoles;
+
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet res = null;
+
+        try {
+            con = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+            pst = con.prepareStatement(SLogin.SQL_SELECT_ROLES_USERS);
+            res = pst.executeQuery();
+
+            mRoles = new MRolesUsers();
+            mRoles.setIdRoles(0);
+            mRoles.setNombre("Selecciona");
+            mRolesUsers.add(mRoles);
+
+            while (res.next()) {
+                mRoles = new MRolesUsers();
+                mRoles.setIdRoles(res.getInt("id_roll"));
+                mRoles.setNombre(res.getString("nombre"));
+                mRolesUsers.add(mRoles);
+            }
+
+        } finally {
+            cerrarConexiones(con, pst, res);
+        }
+
+        return mRolesUsers;
     }
 
     public void actualizarPersona(MPersona mPersona) throws SQLException {

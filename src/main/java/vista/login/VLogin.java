@@ -108,6 +108,7 @@ public class VLogin extends JFrame {
                     }
                 }
         );
+
         RAgrImg.setIconWindow(this, "Logo-Good-Admin.png");
         this.setVisible(true);
     }
