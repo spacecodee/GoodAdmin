@@ -43,9 +43,9 @@ public class PanelLateralLogin extends JPanel {
 
         this.panelesMargenes();
         this.agregarImg();
-        this.panelContenedor();
-        this.agregarBoton();
-        this.agregarLblSms();
+        //this.panelContenedor();
+        //this.agregarBoton();
+        //this.agregarLblSms();
 
         this.setSize(450, 660);
         this.setPreferredSize(new Dimension(450, 660));
